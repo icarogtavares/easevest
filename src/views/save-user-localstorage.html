@@ -1,0 +1,7 @@
+<script>
+  localStorage.setItem('name', '<%= user.name %>')
+  localStorage.setItem('email', '<%= user._id %>')
+  localStorage.setItem('phone', '<%= user.phone %>')
+  localStorage.setItem('isNewUser', <%= isNewUser %>)
+  window.location.replace('<%= absoluteUrl %>/chatbot') 
+</script>

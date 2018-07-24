@@ -1,0 +1,54 @@
+{
+  "name": "easevest",
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.x",
+    "npm": "5.x"
+  },
+  "description": "IBM Watson",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node ./src/index.js",
+    "dev": "NODE_ENV=development DEBUG=easevest:* nodemon ./src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icarotav/easevest.git"
+  },
+  "keywords": [
+    "ibm",
+    "watson",
+    "assistant",
+    "easevest"
+  ],
+  "author": "Icaro Tavares icarotav4@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icarotav/easevest/issues"
+  },
+  "homepage": "https://github.com/icarotav/easevest#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "@cloudant/cloudant": "^2.3.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "debug": "^3.1.0",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.12.1",
+    "http-status": "^1.2.0",
+    "joi": "^13.4.0",
+    "npm": "^6.1.0",
+    "ramda": "^0.25.0"
+  }
+}
