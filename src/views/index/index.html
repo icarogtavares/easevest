@@ -1,9 +1,18 @@
-<%- include('../include/header.html'); %>
+<%- include('../include/nav.html', {
+  homepage: true,
+  btgame: false,
+  seusTestes: false
+}); %>
 
-<% if (!isLogged) {%>
-  <%- include('login.html'); %>
-<% } else {%>
-  <%- include('home.html'); %>
-<% } %>
-
-<%- include('../include/footer.html'); %>
+<div style="padding-top: 84px">
+    <div class="card">
+      <div class="card-header">
+        Olá, seja bem vindo
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">EASE VEST 2018</h5>
+        <p class="card-text">Por favor, aguarde as instruções antes de iniciar o teste.</p>
+        <a href="#" class="btn btn-primary">Tesla Game</a>
+      </div>
+    </div>
+</div>

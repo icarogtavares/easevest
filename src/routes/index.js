@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
 
 router.get('/', (req, res) => {
   const isLogged = true
-  res.render('index/index.html', { isLogged })
+  res.render('index.html', { page: 'index/index.html', isLogged })
 })
 
 module.exports = router
