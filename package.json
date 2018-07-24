@@ -37,7 +37,6 @@
     "nodemon": "^1.17.5"
   },
   "dependencies": {
-    "@cloudant/cloudant": "^2.3.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "debug": "^3.1.0",

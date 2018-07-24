@@ -1,36 +1,27 @@
 <%- include('include/header.html'); %>
-
-<div class="card-body">
-  <form id="form" action="/api/cloudant" hidden="hidden" method="POST">
-    <div class="form-group">
-      <label for="name">Nome<font color="red">*</font></label>
-      <input type="text" class="form-control" id="name" name="name">
-    </div>
-    <div class="form-group">
-      <label for="email">E-mail<font color="red">*</font></label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="email@exemplo.com">
-    </div>
-    <div class="form-group">
-      <label for="phone">Telefone</label>
-      <input type="text" class="form-control" id="phone" name="phone" placeholder="DDD xxxxx-xxxx">
-    </div>
-    <small id="aviso" class="form-text text-muted">(*) Campos de preenchimento obrigatório</small>
-    <div style="text-align: center">
-      <button type="submit" class="btn btn-primary">Acessar</button>
-    </div>
-  </form>
-</div>
-
-<script>
-$(document).ready(function() {
-  var userInLocalStorage = localStorage.getItem('name') && localStorage.getItem('email') && localStorage.getItem('phone')
-  var form = document.querySelector('#form')
-  if(userInLocalStorage) {
-    window.location.replace('<%= absoluteUrl %>/chatbot')
-  } else {
-    form.removeAttribute('hidden')
-  }
-})
-</script>
+<div class="row h-100 justify-content-center align-items-center">
+  <div class="col-sm-6 col-xs-10">
+    <div class="card" style="background-color: rgba(250,250,250,0.95)!important">
+      <div class="card-header text-center">
+        Login
+      </div>
+      <div class="card-body">
+        <form action="/login" method="post">
+          <div class="form-group">
+            <label for="matricula">Matrícula</label>
+            <input type="text" class="form-control" id="matriculaInput">
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senhaInput">
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </div>
+        </form>
+      </div><!--card-body-->
+    </div><!--card-->
+  </div><!--col-->
+</div><!--row-->
 
 <%- include('include/footer.html'); %>
