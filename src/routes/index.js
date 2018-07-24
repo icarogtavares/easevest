@@ -4,7 +4,13 @@ const router = express.Router()
 
 // router.use('/chatbot', chatbotRoutes)
 
-router.get('/', (req, res) => {
-  res.render('index.html', { absoluteUrl: req.absoluteUrl })
+router.get('/login', (req, res) => {
+  res.redirect('/')
 })
+
+router.get('/', (req, res) => {
+  const isLogged = true
+  res.render('index/index.html', { isLogged })
+})
+
 module.exports = router
