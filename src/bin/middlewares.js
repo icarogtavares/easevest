@@ -5,7 +5,9 @@ const path = require('path')
 const ejs = require('ejs')
 const session = require('express-session')
 
+const loginRoutes = require('../routes/login')
 const routes = require('../routes/')
+const { restrict } = require('../controllers/login')
 
 const configureExpress = () => {
   const app = express()
@@ -34,17 +36,19 @@ const configureExpress = () => {
   })
 
   app.use((req, res, next) => {
-    const err = req.session.error
-    const msg = req.session.success
+    const { err, msg, isAdmin } = req.session
     delete req.session.error
     delete req.session.success
+    res.locals.isAdmin = false
     res.locals.message = ''
     if (err) res.locals.message = `<p class="msg error"> ${err} </p>`
     if (msg) res.locals.message = `<p class="msg success"> ${msg} </p>`
+    if (isAdmin) res.locals.isAdmin = isAdmin
     next()
   })
 
-  app.use('/', routes)
+  app.use('/', loginRoutes)
+  app.use('/', restrict, routes)
 
   app.use((req, res, next) => {
     const err = new Error('Not Found')
@@ -53,10 +57,13 @@ const configureExpress = () => {
   })
 
   app.use((err, req, res, next) => { // eslint-disable-line max-params, no-unused-vars
+    if (err.status === 401) {
+      return res.redirect('/login')
+    }
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
     res.status(err.status || err.statusCode || 500)
-    res.send(res.locals.error)
+    return res.json(res.locals.error)
   })
 
   return app
