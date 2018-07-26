@@ -3,6 +3,7 @@ const helmet = require('helmet')
 const express = require('express')
 const path = require('path')
 const ejs = require('ejs')
+const session = require('express-session')
 
 const routes = require('../routes/')
 
@@ -21,8 +22,25 @@ const configureExpress = () => {
   app.use(bodyParser.json())
   app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 
+  app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'provisorio',
+  }))
+
   app.use((req, res, next) => {
     req.absoluteUrl = `https://${req.get('host')}`
+    next()
+  })
+
+  app.use((req, res, next) => {
+    const err = req.session.error
+    const msg = req.session.success
+    delete req.session.error
+    delete req.session.success
+    res.locals.message = ''
+    if (err) res.locals.message = `<p class="msg error"> ${err} </p>`
+    if (msg) res.locals.message = `<p class="msg success"> ${msg} </p>`
     next()
   })
 

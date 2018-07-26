@@ -1,9 +1,5 @@
 <%- include('include/header.html'); %>
 
-<% if (!isLogged) { %>
-  <%- include('login.html'); %>
-<% } else {%>
-  <%- include(page); %>
-<% } %>
+<%- include(page); %>
 
 <%- include('include/footer.html'); %>
