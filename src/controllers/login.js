@@ -1,6 +1,6 @@
 const axiosInstance = require('../bin/api')
 
-const authLogin = ('/login', async (req, res, next) => {
+const authLogin = async (req, res, next) => {
   try {
     const result = await axiosInstance.post('/login', req.body)
     if (result.status !== 200 || !result.data.token) throw new Error('Token Error')
@@ -18,19 +18,22 @@ const authLogin = ('/login', async (req, res, next) => {
     req.session.error = 'Matrícula ou senha inválidos!'
     next(err)
   }
-})
+}
 
-const logout = ('/logout', (req, res) => {
+const logout = (req, res) => {
   req.session.destroy(() => {
     res.redirect('/')
   })
-})
+}
 
-const login = ('/login', (req, res) => {
+const login = (req, res) => {
   res.render('index.html', { page: 'login/index.html' })
-})
+}
 
 async function restrict (req, res, next) {
+  if (process.env.NODE_ENV === 'development') {
+    return next()
+  }
   try {
     if (!req.session.matricula || !req.session.token) throw new Error('Usuário não está logado!')
     const result = await axiosInstance.get('/login', {
