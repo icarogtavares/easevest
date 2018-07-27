@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    Testes Pendentes
+  </div>
+  <div class="card-body">
+  <%
+  if (games && games.constructor === Array) { 
+    games.filter(function (game) {
+      return !game.finalizado
+    }).forEach(function (game) { %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card" style="width: 16rem;">
+            <img class="card-img-top" src="/img/tesla.png" alt="Tesla">
+            <div class="card-body">
+              <h5 class="card-title"><%= game.nome %></h5>
+              <p class="card-text">Tesla model descrição.</p>
+              <a href="#" class="btn btn-primary">CONTINUAR</a>
+            </div>
+          </div>
+        </div>
+      </div><!--row-->
+    <%
+    })
+  } else { %>
+    <p> Não há testes em pendentes.</p>
+  <% } %>
+  </div><!--card-body-->

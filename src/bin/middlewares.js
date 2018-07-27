@@ -59,6 +59,8 @@ const configureExpress = () => {
   app.use((err, req, res, next) => { // eslint-disable-line max-params, no-unused-vars
     if (err.status === 401) {
       return res.redirect('/login')
+    } else if (err.response) {
+      err = err.response.data // eslint-disable-line no-param-reassign
     }
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
