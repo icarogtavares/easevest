@@ -4,6 +4,22 @@
   seusTestes: false
 }); %>
 
-<div>
-<p><%= game.nome %></p>
+<div style="padding-top: 84px">
+  <div class="card">
+    <div class="card-header">
+      <%= game.nome %>
+    </div>
+    <div class="card-body">
+        <form>
+          <%for(var i = 0; i < 5; i++) { %>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="<%= i %>">
+            <label class="form-check-label" for="0">Resposta <%= i %></label>
+          </div>
+          <% } %>
+          <button type="reset" class="btn btn-warning">Limpar Respostas</button>
+          <button type="submit" class="btn btn-primary">Próximo</button>
+        </form>
+    </div><!--card-body-->
+  </div><!--card-->
 </div>

@@ -18,7 +18,16 @@ const index = async (req, res, next) => {
   }
 }
 
-const initGame = async (req, res, next) => {
+const initGame = (req, res) => {
+  console.log(req.session)
+  if (req.session.game) {
+    res.render('index.html', { page: 'btgame/game.html', game: req.session.game })
+  } else {
+    res.redirect('/btgame')
+  }
+}
+
+const createGame = async (req, res, next) => {
   try {
     const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.post(`/alunos/${req.session.matricula}/games`, {
@@ -32,13 +41,16 @@ const initGame = async (req, res, next) => {
     const game = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${result.data.id}`, {
       headers,
     })
-    res.render('index.html', { page: 'btgame/game.html', game: game.data })
+    req.session.game = game.data
+    return res.redirect('/btgame/play')
+    // res.render('index.html', { page: 'btgame/game.html', game: game.data })
   } catch (err) {
-    next(err)
+    return next(err)
   }
 }
 
 module.exports = {
   index,
   initGame,
+  createGame,
 }
