@@ -7,7 +7,7 @@ const index = async (req, res, next) => {
         Authorization: `JWT ${req.session.token}`,
       },
     })
-    return res.render('index.html', { page: 'btgame/index.html', games: result.data })
+    return res.render('index.html', { page: 'btgame/index.html', games: result.data.docs })
   } catch (err) {
     return next(err)
   }
