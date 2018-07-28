@@ -22,14 +22,17 @@ const initGame = async (req, res, next) => {
   try {
     const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.post(`/alunos/${req.session.matricula}/games`, {
-      headers,
-      data: {
+      doc: {
         gameId: req.params.gameId,
         aluno_matricula: req.session.matricula,
       },
+    }, {
+      headers,
     })
-    const game = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${result.id}`)
-    res.render('index.html', { page: 'btgame/game.html', game })
+    const game = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${result.data.id}`, {
+      headers,
+    })
+    res.render('index.html', { page: 'btgame/game.html', game: game.data })
   } catch (err) {
     next(err)
   }
