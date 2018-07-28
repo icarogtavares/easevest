@@ -1,11 +1,11 @@
 <div class="card">
   <div class="card-header">
-    Testes Pendentes
+    Testes Finalizados
   </div>
   <div class="card-body">
   <%
-  if (jogosPendentes && jogosPendentes.length > 0) {
-    jogosPendentes.forEach((game) => { %>
+  if (jogosFinalizados && jogosFinalizados.length > 0) {
+    jogosFinalizados.forEach((game) => { %>
       <div class="row">
         <div class="col-md-4">
           <div class="card" style="width: 16rem;">
@@ -13,7 +13,7 @@
             <div class="card-body text-center">
               <h5 class="card-title"><%= game.nome %></h5>
               <p class="card-text">Tesla model descrição.</p>
-              <a href="#" class="btn btn-primary">RETOMAR</a>
+              <a href="#" class="btn btn-primary">RESULTADO</a>
             </div>
           </div>
         </div>
@@ -21,7 +21,7 @@
       <%
     })
   } else { %>
-    <p>Nenhum teste pendente.</p>
+    <p>Nenhum teste realizado até o momento.</p>
   <% } %>
   </div><!--card-body-->
 </div><!--card-->

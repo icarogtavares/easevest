@@ -1,0 +1,29 @@
+const axiosInstance = require('../bin/api')
+
+const index = async (req, res, next) => {
+  try {
+    const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games`, {
+      headers: {
+        Authorization: `JWT ${req.session.token}`,
+      },
+    })
+    const jogosFinalizados = []
+    const jogosPendentes = []
+    if (result && result.data.docs && result.data.docs.constructor === Array) {
+      result.data.docs.forEach((game) => {
+        if (game.finalizado) {
+          jogosFinalizados.push(game)
+        } else {
+          jogosPendentes.push(game)
+        }
+      })
+    }
+    return res.render('index.html', { page: 'seusTestes/index.html', jogosFinalizados, jogosPendentes })
+  } catch (err) {
+    return next(err)
+  }
+}
+
+module.exports = {
+  index,
+}
