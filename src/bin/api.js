@@ -5,4 +5,12 @@ const axiosInstance = axios.create({
   baseURL: config.API_URL,
 })
 
-module.exports = axiosInstance
+const getHeaderWithAuth = (token) => {
+  const header = { Authorization: `JWT ${token}` }
+  return header
+}
+
+module.exports = {
+  axiosInstance,
+  getHeaderWithAuth,
+}

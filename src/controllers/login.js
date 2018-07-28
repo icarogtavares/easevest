@@ -1,4 +1,4 @@
-const axiosInstance = require('../bin/api')
+const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
 
 const authLogin = async (req, res, next) => {
   try {
@@ -36,10 +36,9 @@ async function restrict (req, res, next) {
   }
   try {
     if (!req.session.matricula || !req.session.token) throw new Error('Usuário não está logado!')
+    const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.get('/login', {
-      headers: {
-        Authorization: `JWT ${req.session.token}`,
-      },
+      headers,
     })
     if (result.status === 200) return next()
     throw new Error('Token inválido!')

@@ -1,11 +1,10 @@
-const axiosInstance = require('../bin/api')
+const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
 
 const index = async (req, res, next) => {
   try {
+    const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games`, {
-      headers: {
-        Authorization: `JWT ${req.session.token}`,
-      },
+      headers,
     })
     const jogosFinalizados = []
     const jogosPendentes = []
