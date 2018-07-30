@@ -25,24 +25,13 @@ const playGame = async (req, res, next) => {
   let currentGame = null
   if (game) {
     try {
-      console.log('GAME', game)
-      let stageNotAnswered = null
-      gameStages.forEach((stage) => {
-        if (!game[stage].respondido && !stageNotAnswered) {
-          stageNotAnswered = stage
-        }
-      })
-      console.log('STAGE', stageNotAnswered)
-      console.log(`/alunos/${req.session.matricula}/games/${game._id}/${stageNotAnswered}`)
       const headers = getHeaderWithAuth(req.session.token)
-      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${game._id}/${stageNotAnswered}`, {
+      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${game._id}/stage/`, {
         headers,
       })
-      console.log('DATA', result.data)
       currentGame = result.data
       if (!currentGame) throw new Error('Jogo não encontrado ou já finalizado!')
       return res.render('index.html', { page: 'btgame/game.html', game: currentGame })
-      // return res.render('index.html', { page: 'btgame/game.html', game: currentGame })
     } catch (err) {
       return next(err)
     }
