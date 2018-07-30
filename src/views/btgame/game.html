@@ -25,11 +25,11 @@
   </div><!--card-->
 </div>
 <script type="text/javascript">
-  var i = 0;
+  var i = 0
   var respostas = {}
   var checkboxes = document.getElementsByName('resposta')
 
-  function checkBoxesDisable (disable) {
+  function disableCheckBoxes (disable) {
     for (var i = 0; i < checkboxes.length; i++) {
       var checkbox = checkboxes[i]
       if (!checkbox.checked) checkbox.disabled = disable
@@ -39,15 +39,16 @@
   function limparRespostas () {
     i = 0
     respostas = {}
+    disableCheckBoxes(false)
   }
 
   function handleClick (cb) {
     i += cb.checked ? 1 : -1
     respostas[cb.id] = true
-    if (i === 3) {
-      checkBoxesDisable(true)
+    if (i === <%= game.respostas.filter(r => r.correta).length %>) {
+      disableCheckBoxes(true)
     } else {
-      checkBoxesDisable(false)
+      disableCheckBoxes(false)
     }
   }
   </script>

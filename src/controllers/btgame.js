@@ -1,6 +1,5 @@
 const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
 const { filter } = require('ramda')
-const gameStages = require('../models/GameStages')
 
 const index = async (req, res, next) => {
   try {
@@ -21,12 +20,12 @@ const index = async (req, res, next) => {
 
 
 const playGame = async (req, res, next) => {
-  const { game } = req.session
   let currentGame = null
-  if (game) {
+  const { gameId } = req.params
+  if (gameId) {
     try {
       const headers = getHeaderWithAuth(req.session.token)
-      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${game._id}/stage/`, {
+      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${gameId}/stage/`, { // eslint-disable-line
         headers,
       })
       currentGame = result.data
@@ -52,12 +51,7 @@ const createGame = async (req, res, next) => {
     }, {
       headers,
     })
-    const game = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${result.data.id}`, {
-      headers,
-    })
-    req.session.game = game.data
-    return res.redirect('/btgame/play')
-    // res.render('index.html', { page: 'btgame/game.html', game: game.data })
+    return res.redirect(`/btgame/play/${result.data.id}`)
   } catch (err) {
     return next(err)
   }
