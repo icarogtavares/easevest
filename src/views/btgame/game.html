@@ -10,16 +10,44 @@
       <%= game.nome %>
     </div>
     <div class="card-body">
-        <form>
-          <%for(var i = 0; i < 5; i++) { %>
+        <h5 class="card-title"><%= game.estagio %></h5>
+        <form method="post" action="/btgame/enviarResposta">
+          <% game.respostas.forEach((resposta) => { %>
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="<%= i %>">
-            <label class="form-check-label" for="0">Resposta <%= i %></label>
+            <input type="checkbox" name="resposta" onclick="handleClick(this)" class="form-check-input" id="<%= resposta.id %>">
+            <label class="form-check-label" for="<%= resposta.id %>"><%= resposta.resposta %></label>
           </div>
-          <% } %>
-          <button type="reset" class="btn btn-warning">Limpar Respostas</button>
+          <% }) %>
+          <button type="reset" onclick="limparRespostas()" class="btn btn-warning">Limpar Respostas</button>
           <button type="submit" class="btn btn-primary">Próximo</button>
         </form>
     </div><!--card-body-->
   </div><!--card-->
 </div>
+<script type="text/javascript">
+  var i = 0;
+  var respostas = {}
+  var checkboxes = document.getElementsByName('resposta')
+
+  function checkBoxesDisable (disable) {
+    for (var i = 0; i < checkboxes.length; i++) {
+      var checkbox = checkboxes[i]
+      if (!checkbox.checked) checkbox.disabled = disable
+    }
+  }
+
+  function limparRespostas () {
+    i = 0
+    respostas = {}
+  }
+
+  function handleClick (cb) {
+    i += cb.checked ? 1 : -1
+    respostas[cb.id] = true
+    if (i === 3) {
+      checkBoxesDisable(true)
+    } else {
+      checkBoxesDisable(false)
+    }
+  }
+  </script>
