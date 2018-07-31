@@ -19,12 +19,12 @@
             </div>
           </div>
         </div>
-      <% if (index % 3 === 2 || index === jogosFinalizados.length) { %>
+      <% if (index % 3 === 2 || index === jogosFinalizados.length - 1) { %>
       </div><!--row-->
       <% }
     })
   } else { %>
-    <p>Nenhum teste realizado até o momento.</p>
+    <p>Nenhum teste finalizado até o momento.</p>
   <% } %>
   </div><!--card-body-->
 </div><!--card-->

@@ -11,10 +11,10 @@
     </div>
     <div class="card-body">
         <h5 class="card-title"><%= game.estagio %></h5>
-        <form method="post" action="/btgame/enviarResposta">
+        <form method="post" action="/btgame/sendAnswer">
           <% game.respostas.forEach((resposta) => { %>
           <div class="form-group form-check">
-            <input type="checkbox" name="resposta" onclick="handleClick(this)" class="form-check-input" id="<%= resposta.id %>">
+            <input type="checkbox" name="respostas" onclick="handleClick(this)" class="form-check-input" value="<%= resposta.id %>" id="<%= resposta.id %>">
             <label class="form-check-label" for="<%= resposta.id %>"><%= resposta.resposta %></label>
           </div>
           <% }) %>
@@ -27,7 +27,7 @@
 <script type="text/javascript">
   var i = 0
   var respostas = {}
-  var checkboxes = document.getElementsByName('resposta')
+  var checkboxes = document.getElementsByName('respostas')
 
   function disableCheckBoxes (disable) {
     for (var i = 0; i < checkboxes.length; i++) {
@@ -45,7 +45,7 @@
   function handleClick (cb) {
     i += cb.checked ? 1 : -1
     respostas[cb.id] = true
-    if (i === <%= game.respostas.filter(r => r.correta).length %>) {
+    if (i === <%= game.numCorrectAnswers %>) {
       disableCheckBoxes(true)
     } else {
       disableCheckBoxes(false)

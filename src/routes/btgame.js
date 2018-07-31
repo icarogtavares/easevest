@@ -3,6 +3,7 @@ const {
   index,
   playGame,
   createGame,
+  sendAnswer,
 } = require('../controllers/btgame')
 
 const router = express.Router()
@@ -10,11 +11,13 @@ const router = express.Router()
 router.route('/')
   .get(index)
 
-router.route('/:gameId')
-  .post(createGame)
-
 router.route('/play/:gameId')
   .get(playGame)
 
+router.route('/sendAnswer')
+  .post(sendAnswer)
+
+router.route('/:gameId')
+  .post(createGame)
 
 module.exports = router
