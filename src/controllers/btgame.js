@@ -1,5 +1,6 @@
 const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
-const { filter } = require('ramda')
+const { filter, contains } = require('ramda')
+const gameStages = require('../models/GameStages')
 
 /* eslint-disable no-underscore-dangle */
 const index = async (req, res, next) => {
@@ -29,12 +30,15 @@ const playGame = async (req, res, next) => {
       const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${gameId}/stage/`, { // eslint-disable-line
         headers,
       })
-      
+
       currentGame = result.data
+      if (!currentGame) throw new Error('Jogo não encontrado!')
+      if (currentGame.finalizado) {
+        return res.redirect(`/btgame/resultado/${currentGame._id}`)
+      }
       const isCorrectAnswer = answer => answer.correta
-      const numCorrectAnswers = filter(isCorrectAnswer, currentGame.respostas).length
+      const numCorrectAnswers = filter(isCorrectAnswer, currentGame.respostas).length // eslint-disable-line max-len
       currentGame.numCorrectAnswers = numCorrectAnswers
-      if (!currentGame) throw new Error('Jogo não encontrado ou já finalizado!')
       req.session.game = currentGame
       return res.render('index.html', { page: 'btgame/game.html', game: currentGame })
     } catch (err) {
@@ -86,9 +90,50 @@ const sendAnswer = async (req, res, next) => {
   }
 }
 
+const resultado = async (req, res, next) => {
+  try {
+    let { game } = req.session
+    const { gameId } = req.params
+    const headers = getHeaderWithAuth(req.session.token)
+    if (!game) {
+      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${gameId}/stage/`, { // eslint-disable-line
+        headers,
+      })
+      game = result.data
+    }
+    const gameOficialResult = await axiosInstance.get(`/btgames/${game.gameId}`, {
+      headers,
+    })
+
+    const gameOficial = gameOficialResult.data
+    let totalAcertos = 0
+    let totalErros = 0
+    gameStages.forEach((stage) => {
+      let acertos = 0
+      let total = 0
+      gameOficial[stage].forEach((answer) => {
+        if (contains(answer.id.toString(), game[stage].respostas)) {
+          acertos += answer.correta ? 1 : 0
+        }
+        total += 1
+      })
+      game[stage].acertos = acertos
+      game[stage].erros = total - acertos
+      totalAcertos += acertos
+      totalErros += game[stage].erros
+    })
+    game.acertos = totalAcertos
+    game.erros = totalErros
+    return res.render('index.html', { page: 'btgame/resultado.html', game, stages: gameStages })
+  } catch (err) {
+    return next(err)
+  }
+}
+
 module.exports = {
   index,
   playGame,
   createGame,
   sendAnswer,
+  resultado,
 }

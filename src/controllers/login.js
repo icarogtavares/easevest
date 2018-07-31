@@ -31,9 +31,9 @@ const login = (req, res) => {
 }
 
 async function restrict (req, res, next) {
-  if (process.env.NODE_ENV === 'development') {
-    return next()
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   return next()
+  // }
   try {
     if (!req.session.matricula || !req.session.token) throw new Error('Usuário não está logado!')
     const headers = getHeaderWithAuth(req.session.token)

@@ -15,7 +15,9 @@
             <div class="card-body text-center">
               <h5 class="card-title"><%= game.nome %></h5>
               <p class="card-text">Tesla model descrição.</p>
-              <a href="#" class="btn btn-primary">RESULTADO</a>
+              <form action="/btgame/resultado/<%= game._id %>">
+                <button type="submit" class="btn btn-primary">RESULTADO</button>
+              </form>
             </div>
           </div>
         </div>

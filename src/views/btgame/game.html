@@ -19,7 +19,7 @@
           </div>
           <% }) %>
           <button type="reset" onclick="limparRespostas()" class="btn btn-warning">Limpar Respostas</button>
-          <button type="submit" class="btn btn-primary">Próximo</button>
+          <button id="proximo" disabled="disabled" type="submit" class="btn btn-primary">Próximo</button>
         </form>
     </div><!--card-body-->
   </div><!--card-->
@@ -28,12 +28,14 @@
   var i = 0
   var respostas = {}
   var checkboxes = document.getElementsByName('respostas')
+  var proximoBtn = document.getElementById('proximo')
 
   function disableCheckBoxes (disable) {
     for (var i = 0; i < checkboxes.length; i++) {
       var checkbox = checkboxes[i]
       if (!checkbox.checked) checkbox.disabled = disable
     }
+    proximoBtn.disabled = !disable
   }
 
   function limparRespostas () {
