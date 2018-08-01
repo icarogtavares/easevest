@@ -28,6 +28,9 @@ const logout = (req, res) => {
 }
 
 const login = (req, res) => {
+  res.locals.homepage = false
+  res.locals.btgame = false
+  res.locals.seusTestes = false
   res.render('index.html', { page: 'login/index.html' })
 }
 

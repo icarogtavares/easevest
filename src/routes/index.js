@@ -8,6 +8,9 @@ router.use('/btgame', btgameRoutes)
 router.use('/seus-testes', seusTestesRoutes)
 
 router.get('/', (req, res) => {
+  res.locals.homepage = true
+  res.locals.btgame = false
+  res.locals.seusTestes = false
   res.render('index.html', { page: 'index/index.html' })
 })
 

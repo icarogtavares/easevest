@@ -1,6 +1,9 @@
 const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
 
 const index = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = false
+  res.locals.seusTestes = true
   try {
     const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games`, {

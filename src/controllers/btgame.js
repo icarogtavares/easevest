@@ -3,7 +3,15 @@ const { filter, contains } = require('ramda')
 const gameStages = require('../models/GameStages')
 
 /* eslint-disable no-underscore-dangle */
+
+const render = (res, params) => {
+  res.render('index.html', params)
+}
+
 const index = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = true
+  res.locals.seusTestes = false
   try {
     const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games`, {
@@ -14,7 +22,10 @@ const index = async (req, res, next) => {
       const estaPendente = game => !game.finalizado
       jogosPendentes = filter(estaPendente, result.data.docs)
     }
-    return res.render('index.html', { page: 'btgame/index.html', jogosPendentes })
+    return render(res, {
+      page: 'btgame/index.html',
+      jogosPendentes,
+    })
   } catch (err) {
     return next(err)
   }
@@ -22,6 +33,9 @@ const index = async (req, res, next) => {
 
 
 const playGame = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = true
+  res.locals.seusTestes = false
   let currentGame = null
   const { gameId } = req.params
   if (gameId) {
@@ -51,6 +65,9 @@ const playGame = async (req, res, next) => {
 }
 
 const createGame = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = true
+  res.locals.seusTestes = false
   try {
     const headers = getHeaderWithAuth(req.session.token)
     const result = await axiosInstance.post(`/alunos/${req.session.matricula}/games`, {
@@ -69,6 +86,9 @@ const createGame = async (req, res, next) => {
 }
 
 const sendAnswer = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = true
+  res.locals.seusTestes = false
   const { respostas } = req.body
   const { game } = req.session
   try {
@@ -92,6 +112,9 @@ const sendAnswer = async (req, res, next) => {
 }
 
 const resultado = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = true
+  res.locals.seusTestes = false
   try {
     let { game } = req.session
     const { gameId } = req.params
