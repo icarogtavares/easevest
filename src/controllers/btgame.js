@@ -116,15 +116,12 @@ const resultado = async (req, res, next) => {
   res.locals.btgame = true
   res.locals.seusTestes = false
   try {
-    let { game } = req.session
     const { gameId } = req.params
     const headers = getHeaderWithAuth(req.session.token)
-    if (!game) {
-      const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${gameId}/stage/`, { // eslint-disable-line
-        headers,
-      })
-      game = result.data
-    }
+    const result = await axiosInstance.get(`/alunos/${req.session.matricula}/games/${gameId}/stage/`, { // eslint-disable-line
+      headers,
+    })
+    const game = result.data
     const gameOficialResult = await axiosInstance.get(`/btgames/${game.gameId}`, {
       headers,
     })
