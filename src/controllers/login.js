@@ -6,6 +6,7 @@ const authLogin = async (req, res, next) => {
     if (result.status !== 200 || !result.data.token) throw new Error('Token Error')
     if (result.data.token) {
       req.session.regenerate(() => {
+        req.session.role = req.body.role
         req.session.matricula = req.body.matricula
         req.session.token = result.data.token
         req.session.success = `Authenticated as ${req.body.matricula}`

@@ -2,7 +2,7 @@ applications:
   - path: .
     name: easevest
     environment_json: 
-      API_URL: 'https://easevest-api.mybluemix.net'
+      API_URL: 'https://easevest-api.mybluemix.net/api'
       EASEVEST_API_KEY: 2b4e67ae-2342-40a8-911e-7527d954b2f3
     memory: 128M
     instances: 1

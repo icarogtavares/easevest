@@ -34,6 +34,7 @@ const playGame = async (req, res, next) => {
       currentGame = result.data
       if (!currentGame) throw new Error('Jogo não encontrado!')
       if (currentGame.finalizado) {
+        req.session.game = currentGame
         return res.redirect(`/btgame/resultado/${currentGame._id}`)
       }
       const isCorrectAnswer = answer => answer.correta

@@ -10,7 +10,8 @@
       <%= game.nome %>
     </div>
     <div class="card-body">
-        <h5 class="card-title"><%= game.estagio %></h5>
+        <h5 class="card-title"><%= game.estagioString %></h5>
+        <small class="form-text text-muted">Nesta etapa <%= game.numCorrectAnswers %> <%= game.numCorrectAnswers === 1 ? 'item está correto' : 'itens estão corretos' %>.</small><br>
         <form method="post" action="/btgame/sendAnswer">
           <% game.respostas.forEach((resposta) => { %>
           <div class="form-group form-check">
