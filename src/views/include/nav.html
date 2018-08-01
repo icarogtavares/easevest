@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" role="navigation">
-  <a class="navbar-brand" href="#">
-      <img src="/img/easebrasil-logo.png" height="48px" alt="EASE BRASIL">
-      <!-- <img src="/img/xpersocial.png" height="48px" alt="EASE BRASIL"> -->
+  <a class="navbar-brand" href="/">
+      <img src="/favicon.ico" height="48px" alt="EASE BRASIL">
+      <img src="/img/xpersocial.png" height="48px" alt="XPER SOCIAL">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <%= homepage ? 'active' : ''%>">
-        <a class="nav-link" href="/">Página Inicial<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Página Inicial</a>
       </li>
       <li class="nav-item <%= btgame ? 'active' : ''%>">
         <a class="nav-link" href="/btgame">BT GAME</a>
@@ -18,6 +18,11 @@
       <li class="nav-item <%= seusTestes ? 'active' : ''%>">
         <a class="nav-link" href="/seus-testes">Seus Testes</a>
       </li>
+      <% if (user && user.role === 'admin') { %>
+      <li class="nav-item <%= (!homepage && !btgame && !seusTestes) ? 'active' : ''%>">
+        <a class="nav-link" href="/admin">Área de Administração</a>
+      </li>
+      <% } %>
     </ul>
     <ul class="navbar-nav mr-sm-2">
       <li class="nav-item">

@@ -1,7 +1,7 @@
 const { axiosInstance, getHeaderWithAuth } = require('../bin/api')
 const { filter, contains } = require('ramda')
 const gameStages = require('../models/GameStages')
-
+const GameStagesEnum = require('../models/GameStagesEnum')
 /* eslint-disable no-underscore-dangle */
 
 const render = (res, params) => {
@@ -141,6 +141,7 @@ const resultado = async (req, res, next) => {
         }
         total += 1
       })
+      game[stage].nome = GameStagesEnum[stage]
       game[stage].acertos = acertos
       game[stage].erros = total - acertos
       totalAcertos += acertos

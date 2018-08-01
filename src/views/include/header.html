@@ -14,7 +14,7 @@
     <title>EASEVEST</title>
   </head>
   <body style="background-color: #092136">
-    <% if (homepage || btgame || seusTestes) { %>
+    <% if (user && user.role) { %>
     <%- include('nav.html', {
       homepage,
       btgame,

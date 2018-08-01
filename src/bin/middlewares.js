@@ -47,8 +47,18 @@ const configureExpress = () => {
     next()
   })
 
+  app.use((req, res, next) => {
+    if (req.session && req.session.role) {
+      res.locals.user = { role: req.session.role }
+    } else {
+      res.locals.user = null
+    }
+    next()
+  })
   app.use('/', loginRoutes)
   app.use('/', restrict, routes)
+  // app.use(restrict)
+  // app.use('/', routes)
 
   app.use((req, res, next) => {
     const err = new Error('Not Found')

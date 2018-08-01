@@ -18,7 +18,7 @@
             <tbody>
               <% stages.forEach((stage) => { %>
               <tr>
-                <td><%= stage %></td>
+                <td><%= game[stage].nome %></td>
                 <td><%= game[stage].acertos %></td>
                 <td><%= game[stage].erros %></td>
                 <td><%= ((Number(game[stage].acertos) * 100) / (Number(game[stage].acertos) + Number(game[stage].erros))).toFixed(2) %>%</td>
