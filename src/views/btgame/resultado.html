@@ -11,7 +11,6 @@
               <tr>
                 <th scope="col">BT Model</th>
                 <th scope="col">Acertos</th>
-                <th scope="col">Erros</th>
                 <th scope="col">%</th>
               </tr>
             </thead>
@@ -19,16 +18,14 @@
               <% stages.forEach((stage) => { %>
               <tr>
                 <td><%= game[stage].nome %></td>
-                <td><%= game[stage].acertos %></td>
-                <td><%= game[stage].erros %></td>
-                <td><%= ((Number(game[stage].acertos) * 100) / (Number(game[stage].acertos) + Number(game[stage].erros))).toFixed(2) %>%</td>
+                <td><%= game[stage].acertos %> de <%= game[stage].possibilidades %></td>
+                <td><%= ((Number(game[stage].acertos) * 100) / (Number(game[stage].possibilidades))).toFixed(2) %>%</td>
               </tr>
               <% }) %>
               <tr>
                 <td>Total</td>
-                <td><%= game.acertos %></td>
-                <td><%= game.erros %></td>
-                <td><%= ((Number(game.acertos) * 100) / (Number(game.acertos) + Number(game.erros))).toFixed(2) %>%</td>
+                <td><%= game.acertos %> de <%= game.possibilidades %></td>
+                <td><%= ((Number(game.acertos) * 100) / (Number(game.possibilidades))).toFixed(2) %>%</td>
               </tr>
             </tbody>
           </table>

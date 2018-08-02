@@ -130,24 +130,22 @@ const resultado = async (req, res, next) => {
 
     const gameOficial = gameOficialResult.data
     let totalAcertos = 0
-    let totalErros = 0
+    let totalPossibilidades = 0
     gameStages.forEach((stage) => {
       let acertos = 0
-      let total = 0
       gameOficial[stage].forEach((answer) => {
         if (contains(answer.id.toString(), game[stage].respostas)) {
           acertos += answer.correta ? 1 : 0
         }
-        total += 1
       })
       game[stage].nome = GameStagesEnum[stage]
       game[stage].acertos = acertos
-      game[stage].erros = total - acertos
+      game[stage].possibilidades = game[stage].respostas.length
       totalAcertos += acertos
-      totalErros += game[stage].erros
+      totalPossibilidades += game[stage].possibilidades
     })
     game.acertos = totalAcertos
-    game.erros = totalErros
+    game.possibilidades = totalPossibilidades
     return res.render('index.html', { page: 'btgame/resultado.html', game, stages: gameStages })
   } catch (err) {
     return next(err)
