@@ -1,5 +1,8 @@
 
 <div style="padding-top: 84px">
+  <% if (jogosFinalizados.length === 0 && jogosPendentes.length === 0) { %>
+    <%- include('testes-disponiveis.html'); %>
+  <% } %>
   <%- include('testes-finalizados.html', { jogosFinalizados }); %>
   <%- include('testes-pendentes.html', { jogosPendentes }); %>
 </div>

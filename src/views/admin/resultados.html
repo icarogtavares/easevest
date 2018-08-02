@@ -1,0 +1,37 @@
+<div style="padding-top: 84px">
+    <div class="card">
+      <div class="card-header">
+        <%= game.nome %>
+      </div>
+      <div class="card-body">
+          <h5 class="card-title">Resultado Geral</h5>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Matrícula</th>
+                  <% gameStages.forEach((stage) => { %>
+                    <th scope="col"><%= GameStagesEnum[stage] %></th>
+                  <% }) %>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% resultados.forEach((resultado, index) => { %>
+                  <tr>
+                    <th scope="row"><%= index + 1 %></td>
+                    <td><%= resultado.alunoMatricula %></td>
+                    <% gameStages.forEach((stage) => { %>
+                      <td><%= resultado[stage].acertos %></td>
+                    <% }) %>
+                    <td><%= resultado.acertos %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+      </div><!--card-body-->
+    </div><!--card-->
+  </div>
+  

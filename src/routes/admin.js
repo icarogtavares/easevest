@@ -6,6 +6,7 @@ const {
   postEdit,
   create,
   destroy,
+  resultados,
 } = require('../controllers/admin')
 const alunoRoutes = require('./admin/alunos')
 const administradoresRoutes = require('./admin/administradores')
@@ -20,6 +21,9 @@ router.use('/administradores', administradoresRoutes)
 
 router.route('/users/')
   .post(create)
+
+router.route('/users/resultados')
+  .get(resultados)
 
 router.route('/users/destroy')
   .post(destroy)
