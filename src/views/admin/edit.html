@@ -5,20 +5,20 @@
       </div>
       <div class="card-body">
           <h5 class="card-title">Editar <%= reqUser.nome %></h5>
-          <form method="post" action="/admin/<%= reqUser.matricula %>/edit">
+          <form method="post" action="/admin/users/<%= reqUser._id %>/edit">
             <div class="form-group">
               <label for="matricula">Matrícula</label>
-              <input type="text" class="form-control" id="matricula" value="<%= reqUser.matricula %>">
+              <input type="text" class="form-control" name="matricula" id="matricula" value="<%= reqUser.matricula %>">
             </div>
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" class="form-control" id="nome" value="<%= reqUser.nome %>">
+              <input type="text" class="form-control" name="nome" id="nome" value="<%= reqUser.nome %>">
             </div>
             <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="role" <%= reqUser.role === 'admin' ? 'checked' : '' %> >
+              <input type="checkbox" class="form-check-input" name="role" id="role" <%= reqUser.role === 'admin' ? 'checked' : '' %> >
               <label class="form-check-label" for="role">Privilégios de administrador</label>
             </div>
-            <a class="btn btn-danger" href="/admin/<%= reqUser.role === 'admin' ? 'administradores' : 'alunos' %>">Cancelar</a>
+            <a class="btn btn-secondary" href="/admin/<%= reqUser.role === 'admin' ? 'administradores' : 'alunos' %>">Cancelar</a>
             <button type="submit" class="btn btn-primary">Editar</button>
           </form>
       </div><!--card-body-->

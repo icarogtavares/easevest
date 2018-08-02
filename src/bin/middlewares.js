@@ -36,14 +36,12 @@ const configureExpress = () => {
   })
 
   app.use((req, res, next) => {
-    const { err, msg, isAdmin } = req.session
-    delete req.session.error
-    delete req.session.success
-    res.locals.isAdmin = false
+    const { err, msg } = req.session
+    delete req.session.err
+    delete req.session.msg
     res.locals.message = ''
-    if (err) res.locals.message = `<p class="msg error"> ${err} </p>`
-    if (msg) res.locals.message = `<p class="msg success"> ${msg} </p>`
-    if (isAdmin) res.locals.isAdmin = isAdmin
+    if (err) res.locals.message = `<p class="alert alert-danger"> ${err} </p>`
+    if (msg) res.locals.message = `<p class="alert alert-success"> ${msg} </p>`
     next()
   })
 

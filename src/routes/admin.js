@@ -4,6 +4,7 @@ const {
   view,
   getEdit,
   postEdit,
+  create,
 } = require('../controllers/admin')
 const alunoRoutes = require('./admin/alunos')
 const administradoresRoutes = require('./admin/administradores')
@@ -15,6 +16,9 @@ router.route('/')
 
 router.use('/alunos', alunoRoutes)
 router.use('/administradores', administradoresRoutes)
+
+router.route('/users/')
+  .post(create)
 
 router.route('/users/:userId/view')
   .get(view)

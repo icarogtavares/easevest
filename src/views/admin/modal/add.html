@@ -1,0 +1,38 @@
+<a data-toggle="modal" href="/" data-target="#modalAdd"><i class="fas fa-user-plus align-content-end"></i></a>
+<div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAddLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAddLabel">Adicionar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/users/">
+          <div class="form-group">
+            <label for="matricula">Matrícula</label>
+            <input type="text" class="form-control" name="matricula" id="matricula">
+          </div>
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="nome">
+          </div>
+          <div class="form-group">
+              <label for="nome">Senha</label>
+              <input type="password" class="form-control" name="senha" id="senha" aria-describedby="senhaHelp">
+              <small id="senhaHelp" class="form-text text-muted">Senha poderá ser alterada futuramente.</small>
+            </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" name="role" id="role" >
+            <label class="form-check-label" for="role">Privilégios de administrador</label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
