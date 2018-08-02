@@ -13,9 +13,13 @@ const index = async (req, res, next) => {
       headers,
     })
     if (result && result.data && result.data.docs) {
-      return res.render('index.html', { page: 'admin/alunos/index.html', alunos: result.data.docs })
+      return res.render('index.html', {
+        page: 'admin/view_all.html',
+        pageTitle: 'Alunos',
+        users: result.data.docs,
+      })
     }
-    throw new Error('Não foi possível recuperar os alunos') 
+    throw new Error('Não foi possível recuperar os alunos')
   } catch (err) {
     return next(err)
   }

@@ -1,0 +1,74 @@
+<div style="padding-top: 84px">
+    <div class="card">
+      <div class="card-header">
+        <%= pageTitle %>
+      </div>
+      <div class="card-body">
+          <h5 class="card-title">Lista</h5>
+          <div class="table-responsive-sm">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Matrícula</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.forEach((user) => { %>
+                <tr>
+                  <td><%= user.matricula %></td>
+                  <td><%= user.nome %></td>
+                  <td>
+                    <a data-toggle="modal" data-target="#modalView<%= user.matricula %>" href="/admin/users/<%= user.matricula %>"><i class="fas fa-eye"></i></a>
+                    <a href="/admin/users/<%= user.matricula %>/edit"><i class="fas fa-edit"></i></a>
+                    <a data-toggle="modal" data-target="#modalDestroy<%= user.matricula %>" href="/admin/users/<%= user.users %>/destroy"><i class="fas fa-trash-alt"></i></a>
+                  </td>
+                  <!-- Modal Destroy -->
+                  <div class="modal fade" id="modalDestroy<%= user.matricula %>" tabindex="-1" role="dialog" aria-labelledby="modal<%= user.matricula %>Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalDestroy<%= user.matricula %>DestroyLabel"><%= user.nome %></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Você tem certeza que deseja remover o <%= user.nome %> de matrícula <%= user.matricula %>?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-danger">Deletar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal View -->
+                  <div class="modal fade" id="modalView<%= user.matricula %>" tabindex="-1" role="dialog" aria-labelledby="modalView<%= user.matricula %>Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalView<%= user.matricula %>Label"><%= user.nome %></h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Matrícula: <%= user.matricula %>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+      </div><!--card-body-->
+    </div><!--card-->
+  </div>
+  
