@@ -31,6 +31,7 @@ const login = (req, res) => {
   res.locals.homepage = false
   res.locals.btgame = false
   res.locals.seusTestes = false
+  res.locals.user = null
   res.render('index.html', { page: 'login/index.html' })
 }
 
@@ -47,6 +48,7 @@ async function restrict (req, res, next) {
     if (result.status === 200) return next()
     throw new Error('Token inválido!')
   } catch (err) {
+    res.locals.user = null
     req.session.error = err.message || 'Acesso negado!'
     return res.redirect('/login')
   }

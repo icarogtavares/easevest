@@ -5,7 +5,26 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">Lista</h5>
-        <p>TESTE</p>
+        <div class="table-responsive-sm">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% alunos.forEach((aluno) => { %>
+              <tr>
+                <td><%= aluno.matricula %></td>
+                <td><%= aluno.nome %></td>
+                <td><a href="/admin/alunos/<%= aluno.matricula %>"><i class="fas fa-eye"></i></a></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
     </div><!--card-body-->
   </div><!--card-->
 </div>

@@ -1,5 +1,5 @@
 const express = require('express')
-const { index } = require('../../controllers/alunos')
+const { index } = require('../../controllers/admin/alunos')
 
 const router = express.Router()
 
