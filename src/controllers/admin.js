@@ -100,10 +100,33 @@ const create = async (req, res, next) => {
   return res.redirect(doc.role === 'admin' ? '/admin/administradores' : '/admin/alunos')
 }
 
+const destroy = async (req, res, next) => {
+  res.locals.homepage = false
+  res.locals.btgame = false
+  res.locals.seusTestes = false
+  if (req.session.role !== 'admin') {
+    return next(new Error('Não autorizado!'))
+  }
+  const doc = req.body
+  try {
+    const headers = getHeaderWithAuth(req.session.token)
+    await axiosInstance.delete('/users', {
+      data: doc,
+      headers,
+    })
+    req.session.msg = 'Usuário removido com sucesso!'
+  } catch (err) {
+    req.session.err = err.message || 'Não foi possível remover o usuário'
+    // return next(err)
+  }
+  return res.redirect(doc.role === 'admin' ? '/admin/administradores' : '/admin/alunos')
+}
+
 module.exports = {
   index,
   view,
   getEdit,
   postEdit,
   create,
+  destroy,
 }

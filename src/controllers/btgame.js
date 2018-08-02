@@ -89,11 +89,13 @@ const sendAnswer = async (req, res, next) => {
   res.locals.homepage = false
   res.locals.btgame = true
   res.locals.seusTestes = false
-  const { respostas } = req.body
+  let { respostas } = req.body
   const { game } = req.session
   try {
+    if (respostas.constructor !== Array) {
+      respostas = [respostas]
+    }
     if (game.numCorrectAnswers !== respostas.length) throw new Error('Número de respostas marcadas não está de acordo com o número de respostas corretas!')
-
     const doc = {}
     doc[game.estagio] = {
       respostas,

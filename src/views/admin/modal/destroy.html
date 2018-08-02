@@ -12,8 +12,13 @@
         <p>Você tem certeza que deseja remover o <%= user.nome %> de matrícula <%= user.matricula %>?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-danger">Deletar</button>
+        <form method="post" action="/admin/users/destroy">
+          <input type="hidden" name="docId" value="<%= user._id %>">
+          <input type="hidden" name="docRev" value="<%= user._rev %>">
+          <input type="hidden" name="role" value="<%= user.role %>">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
       </div>
     </div>
   </div>
