@@ -5,10 +5,10 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">EASE Seleção Top 40</h5>
-        <p class="card-text">Por favor, aguarde as instruções antes de iniciar o teste.</p>
         <% if (jogosFinalizados.length === 0 && jogosPendentes.length === 0) { %>
-          <form action="/btgame/teslamodel" method="post">
-            <button onClick="this.disabled=true; this.value='Iniciando Teste...';" type="submit" class="btn btn-primary">TESLA GAME</button>
+          <p class="card-text">Por favor, aguarde as instruções antes de iniciar o teste.</p>
+          <form id="teslagameForm" action="/btgame/teslamodel" method="post">
+            <button id="teslagameBtn" type="submit" class="btn btn-primary">TESLA GAME</button>
           </form>
         <% } %>
       </div>
@@ -21,6 +21,11 @@
     <% } %>
 </div>
 <script>
-
+var teslagameForm = document.getElementById('teslagameForm')
+teslagameForm.onsubmit = function() {
+  var teslagameBtn = document.getElementById('teslagameBtn')
+  teslagameBtn.textContent='Iniciando Teste...'
+  teslagameBtn.disabled=true
+}
   
 </script>
