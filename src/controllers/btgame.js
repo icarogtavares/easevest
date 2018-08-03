@@ -60,7 +60,7 @@ const playGame = async (req, res, next) => {
       return next(err)
     }
   } else {
-    return res.redirect('/btgame')
+    return res.redirect('/')
   }
 }
 

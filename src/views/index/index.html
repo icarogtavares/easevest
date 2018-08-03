@@ -13,6 +13,10 @@
         <% } %>
       </div>
     </div>
+    <% if (jogosFinalizados) { %>
     <%- include('../seusTestes/testes-finalizados.html', { jogosFinalizados }); %>
+    <% }
+      if (jogosPendentes) { %>
     <%- include('../seusTestes/testes-pendentes.html', { jogosPendentes }); %>
+    <% } %>
 </div>
