@@ -72,7 +72,7 @@ const configureExpress = () => {
     }
     res.locals.message = err.message
     // res.locals.error = req.app.get('env') === 'development' ? err : {}
-    res.locals.error = er
+    res.locals.error = err
     res.status(err.status || err.statusCode || 500)
     return res.json(res.locals.error)
   })
