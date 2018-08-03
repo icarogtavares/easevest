@@ -8,7 +8,7 @@
         <p class="card-text">Por favor, aguarde as instruções antes de iniciar o teste.</p>
         <% if (jogosFinalizados.length === 0 && jogosPendentes.length === 0) { %>
           <form action="/btgame/teslamodel" method="post">
-            <button type="submit" class="btn btn-primary">TESLA GAME</button>
+            <button onClick="this.disabled=true; this.value='Iniciando Teste...';" type="submit" class="btn btn-primary">TESLA GAME</button>
           </form>
         <% } %>
       </div>
@@ -20,3 +20,7 @@
     <%- include('../seusTestes/testes-pendentes.html', { jogosPendentes }); %>
     <% } %>
 </div>
+<script>
+
+  
+</script>
