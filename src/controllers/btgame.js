@@ -95,7 +95,7 @@ const sendAnswer = async (req, res, next) => {
     if (respostas.constructor !== Array) {
       respostas = [respostas]
     }
-    if (game.numCorrectAnswers !== respostas.length) throw new Error('Número de respostas marcadas não está de acordo com o número de respostas corretas!')
+    // if (game.numCorrectAnswers !== respostas.length) throw new Error('Número de respostas marcadas não está de acordo com o número de respostas corretas!')
     const doc = {}
     doc[game.estagio] = {
       respostas,
