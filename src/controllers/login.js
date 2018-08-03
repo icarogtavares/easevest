@@ -49,6 +49,7 @@ async function restrict (req, res, next) {
     throw new Error('Token inválido!')
   } catch (err) {
     res.locals.user = null
+    req.session.err = err.message || 'Acesso negado!'
     req.session.error = err.message || 'Acesso negado!'
     return res.redirect('/login')
   }

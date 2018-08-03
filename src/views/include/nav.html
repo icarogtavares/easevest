@@ -15,9 +15,9 @@
       <!-- <li class="nav-item <%= btgame ? 'active' : ''%>">
         <a class="nav-link" href="/btgame">BT GAME</a>
       </li> -->
-      <li class="nav-item <%= seusTestes ? 'active' : ''%>">
+      <!-- <li class="nav-item <%= seusTestes ? 'active' : ''%>">
         <a class="nav-link" href="/seus-testes">Seus Testes</a>
-      </li>
+      </li> -->
       <% if (user && user.role === 'admin') { %>
       <li class="nav-item <%= (!homepage && !btgame && !seusTestes) ? 'active' : ''%>">
         <a class="nav-link" href="/admin">Área de Administração</a>
