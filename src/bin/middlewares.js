@@ -71,8 +71,7 @@ const configureExpress = () => {
       err = err.response.data // eslint-disable-line no-param-reassign
     }
     res.locals.message = err.message
-    // res.locals.error = req.app.get('env') === 'development' ? err : {}
-    res.locals.error = err
+    res.locals.error = req.app.get('env') === 'development' ? err : {}
     res.status(err.status || err.statusCode || 500)
     return res.json(res.locals.error)
   })
