@@ -6,7 +6,7 @@
     <div class="card-body">
         <h5 class="card-title"><%= game.estagioString %></h5>
         <small class="form-text text-muted">Nesta etapa <%= game.numCorrectAnswers %> <%= game.numCorrectAnswers === 1 ? 'item está correto' : 'itens estão corretos' %>.</small><br>
-        <form method="post" action="/btgame/sendAnswer">
+        <form id="gameform" method="post" action="/btgame/sendAnswer">
           <% game.respostas.forEach((resposta) => { %>
           <div class="form-group form-check">
             <input type="checkbox" name="respostas" onclick="handleClick(this)" class="form-check-input" value="<%= resposta.id %>" id="<%= resposta.id %>">
@@ -47,5 +47,11 @@
     } else {
       disableCheckBoxes(false)
     }
+  }
+
+  var gameform = document.getElementById('gameform')
+  gameform.onsubmit = function() {
+    proximoBtn.textContent='Enviando resposta...'
+    proximoBtn.disabled=true
   }
   </script>
